@@ -1,44 +1,65 @@
 class converter {
-  snakeToCamel = snake => {
-    let snakeArray = Array.from(snake);
+  converToCamelFormat = anyStr => {
+    let strArray = Array.from(anyStr);
 
-    snakeArray.forEach((char, index) => {
-      let indexOfUnderScore;
-
-      if (snake[index] === "_") {
-        snakeArray[index] = "";
-        snakeArray[index + 1] = snakeArray[index + 1].toUpperCase();
+    strArray.forEach((char, index) => {
+      if (anyStr[index] === "_" || strArray[index] === "-") {
+        strArray[index] = "";
+        strArray[index + 1] = strArray[index + 1].toUpperCase();
       }
     });
 
-    return snakeArray.join("");
+    return strArray.join("");
   };
 
-  camelToSnake = camel => {
-    const upperCamel = camel.toUpperCase();
-    let camelArray = Array.from(camel);
-    const upperCamelArray = Array.from(upperCamel);
+  toSnake = anyStr => {
+    const upperStr = anyStr.toUpperCase();
+    let strArray = Array.from(anyStr);
+    const upperStrArray = Array.from(upperStr);
     let indexsOfUpperChars = [];
 
-    camelArray.forEach((char, index) => {
-      const areCharsEqual = char === upperCamelArray[index];
+    strArray.forEach((char, index) => {
+      const areCharsEqual = char === upperStrArray[index];
 
-      if (areCharsEqual) {
-        camelArray[index] = camelArray[index].toLowerCase();
+      if (areCharsEqual && char !== "-" && char !== "_") {
+        strArray[index] = strArray[index].toLowerCase();
         indexsOfUpperChars.push(index);
+      } else if (areCharsEqual && char === "-" && areCharsEqual !== "_") {
+        strArray[index] = "_";
       }
     });
     indexsOfUpperChars.forEach((char, index) => {
-      camelArray.splice(char + index, 0, "_");
+      strArray.splice(char + index, 0, "_");
     });
-    return camelArray.join("");
+    return strArray.join("");
+  };
+
+  toCamel = anyStr => {
+    const hasUnderScore = anyStr.includes("-");
+    const hasHyphen = anyStr.includes("_");
+
+    let camelStr;
+    if (hasUnderScore || hasHyphen) {
+      camelStr = this.converToCamelFormat(anyStr);
+    }
+
+    const hasDifferentSizeLetter = anyStr === anyStr.toLowerCase();
+
+    console.log(camelStr);
+
+    return camelStr;
   };
 
   toCapital = anyStr => {
     const hasUnderScore = anyStr.includes("_");
+    const hasHyphen = anyStr.includes("-");
+
     const arrayOfStr = Array.from(anyStr.toLowerCase());
-    if (hasUnderScore) {
-      let filteredArray = arrayOfStr.filter(char => char !== "_");
+
+    if (hasUnderScore || hasHyphen) {
+      let filteredArray = arrayOfStr.filter(
+        char => char !== "_" && char !== "-"
+      );
       filteredArray[0] = filteredArray[0].toUpperCase();
       return filteredArray.join("");
     }
@@ -48,8 +69,7 @@ class converter {
   };
 }
 
-//Test
-// a = new converter();
+a = new converter();
 
-// c = a.toCapital("Aa_se_de_ceAADDD");
-// console.log(c);
+c = a.toSnake("cagataySert_adana_deneme");
+console.log(c);
