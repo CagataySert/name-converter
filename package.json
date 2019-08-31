@@ -7,7 +7,7 @@
     "build": "babel src -d lib"
   },
   "author": "cagataysert",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
