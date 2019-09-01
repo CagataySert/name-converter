@@ -1,4 +1,4 @@
-class Converter {
+module.exports = class Converter {
   static toSnake = anyStr => {
     const upperStr = anyStr.toUpperCase();
     let strArray = Array.from(anyStr);
@@ -21,18 +21,25 @@ class Converter {
     return strArray.join("");
   };
 
+  static convertToCamelFormat = anyStr => {
+    let strArray = Array.from(anyStr);
+    strArray.forEach((char, index) => {
+      if (anyStr[index] === "_" || strArray[index] === "-") {
+        strArray[index] = "";
+        strArray[index + 1] = strArray[index + 1].toUpperCase();
+      }
+    });
+    return strArray.join("");
+  };
+
   static toCamel = anyStr => {
     const hasUnderScore = anyStr.includes("-");
     const hasHyphen = anyStr.includes("_");
 
     let camelStr;
     if (hasUnderScore || hasHyphen) {
-      camelStr = this.converToCamelFormat(anyStr);
+      camelStr = this.convertToCamelFormat(anyStr);
     }
-
-    const hasDifferentSizeLetter = anyStr === anyStr.toLowerCase();
-
-    console.log(camelStr);
 
     return camelStr;
   };
@@ -54,6 +61,4 @@ class Converter {
     arrayOfStr[0] = arrayOfStr[0].toUpperCase();
     return arrayOfStr.join("");
   };
-}
-
-export default Converter;
+};
