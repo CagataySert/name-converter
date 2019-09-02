@@ -1,6 +1,6 @@
 {
   "name": "@cagataysert/nameconverter",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "Convert snake_case variables to camelCase or reverse.",
   "main": "./dist/index.js",
   "scripts": {

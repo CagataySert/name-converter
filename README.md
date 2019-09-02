@@ -13,7 +13,7 @@ npm install nameconverter
 ## Usage
 
 ```python
-import Converter from "converter";
+import Converter from "@cagataysert/nameconverter";
 
 converter.toSnake('fooBar') # returns 'foo_bar'
 converter.toSnake('foo-bar') # returns 'foo_bar'
